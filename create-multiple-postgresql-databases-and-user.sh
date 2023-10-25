@@ -11,7 +11,7 @@ function create_user_and_database() {
 	local database=$(echo $1 | tr ',' ' ' | awk  '{print $2}')
 	echo "  Creating user '$owner' and database '$database'"
 
-    psql -U postgres -tc "SELECT 1 FROM pg_user WHERE usename = '$owner'" | grep -q 1 || psql -U postgres -c "CREATE USER $owner;"
+    psql -U postgres -tc "SELECT 1 FROM pg_user WHERE usename = '$owner'" | grep -q 1 || psql -U postgres -c "CREATE USER $owner WITH LOGIN SUPERUSER CREATEDB CREATEROLE;"
 	
     psql -U postgres -tc "SELECT 1 FROM pg_database WHERE datname = '$database'" | grep -q 1 || psql -U postgres -c "CREATE DATABASE $database"
     
