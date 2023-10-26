@@ -21,10 +21,14 @@ Clone the repository, mount its directory as a volume into
 `POSTGRES_MULTIPLE_USERS_AND_DATABASES` environment variable as follows
 (`docker-compose` syntax):
 
-    myapp-postgresql:
-        image: postgres:9.6.2
+    postgres:
+        image: ismail0352/postgres-multi-user-and-db
+        ports:
+            - "5432"
         environment:
-            - POSTGRES_MULTIPLE_USERS_AND_DATABASES="ownerOfDB1,DB1: ownerOfDB2,DB2: ...ownerOfDB(n), DB(n)"
+            # # Syntax for multiple users and multiple DB's
+            # # - POSTGRES_MULTIPLE_USERS_AND_DATABASES="ownerOfDB1,DB1: ownerOfDB2,DB2: ...ownerOfDB(n), DB(n)"
+            POSTGRES_MULTIPLE_USERS_AND_DATABASES: "my_user,my_DB: your_user,your_DB" 
 
 ### Non-standard database names
 
